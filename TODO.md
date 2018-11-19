@@ -6,9 +6,6 @@ article controller
 - [ x ] post
 - [ x ] update
 
-user controller
----
-
 auth controller
 ---
 
@@ -16,6 +13,7 @@ auth controller
 - [] auth by user group
 - [] token expire
 - [] token persistance
+- [] salted password
 
 validation
 ---
