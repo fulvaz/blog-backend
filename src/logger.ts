@@ -1,18 +1,20 @@
-import { env } from '../config/config';
+import { env, config } from '../config/config';
+import {resolve} from 'path';
 import log4js from 'log4js';
 log4js.configure({
     appenders: {
         businessErr: {
             type: 'file',
-            filename: '/var/log/blog/business.log'
+            filename: resolve(process.cwd(), config.logPath, 'business.log'),
         },
         runtimeErr: {
             type: 'file',
-            filename: '/var/log/blog/runtime.log'
+            filename: resolve(process.cwd(), config.logPath, 'runtime.log'),
         },
         out: { type: 'stdout' },
     },
     categories: {
+        default: { appenders: ['out'], level: 'info'},
         article: {
             appenders: ['businessErr', 'out'],
             level: 'info'

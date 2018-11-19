@@ -1,37 +1,32 @@
 import passport from 'koa-passport';
+import db from './models/index.js';
+import jwt from 'jwt-then';
+import { config } from '../config/config';
+import { Strategy as BearerStrategy } from 'passport-http-bearer';
 
-const fetchUser = (() => {
-    // This is an example! Use password hashing in your project and avoid storing passwords in your code
-    const user = { id: 1, username: 'test', password: 'test' }
-    return async function () {
-        return user
-    }
-})();
-
-// 猜测: 前端每次都在HTTP header中放Authorization7 passport会自动帮我读取bearer的内容, 然后校验, 如果校验通过就执行1
-// 但不科学的是1只有个token, 怎么取用户啊?
-passport.serializeUser(function (user, done) {
-    done(null, user.id)
-})
-
-passport.deserializeUser(async function (id, done) {
-    try {
-        
-        const user = await fetchUser()
-        done(null, user)
-    } catch (err) {
-        done(err)
-    }
-})
-
-const Strategy = require('passport-http-bearer').Strategy
-passport.use(new Strategy(
-    // 1
-    function (token, cb) {
-        db.users.findByToken(token, function (err, user) {
-            if (err) { return cb(err); }
-            if (!user) { return cb(null, false); }
-            return cb(null, user);
-        });
+const LocalStrategy = require('passport-local').Strategy
+passport.use(new LocalStrategy(
+    async function (username, pass, cb) {
+        try {
+            const user = await db.User.findOne({ where: { name: username } });
+            if (user.password === pass) {
+                const token  = await jwt.sign({id: user.id}, config.jwtSecret);
+                cb(null, token);
+            } else {
+                cb(null, false);
+            }
+        } catch (error) {
+            cb(error, false);
+        }
     })
 );
+
+// 执行passport.authenticate会执行这堆内容
+passport.use(new BearerStrategy(
+    async function(token, cb) {
+        const {id} = await jwt.verify(token, config.jwtSecret);
+        cb(null, id);
+    }
+));
+
+export const passportA = passport;

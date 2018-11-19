@@ -9,7 +9,13 @@ article controller
 user controller
 ---
 
-- [ ] auth
+auth controller
+---
+
+- [] different auth info
+- [] auth by user group
+- [] token expire
+- [] token persistance
 
 validation
 ---
@@ -29,13 +35,13 @@ error handler
 - [ x ] error handler middleware
 - [ x ] use log4js
 
-
-
 deploy
 ---
 
 - [ ] nginx
 - [ ] gitlab ci (github ci)
+- [ ] hot reload, require.cache
+- [ ] scaling solution
 
 test
 ---
