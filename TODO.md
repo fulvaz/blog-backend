@@ -1,3 +1,8 @@
+前端
+---
+
+
+
 article controller
 ---
 
@@ -12,13 +17,13 @@ auth controller
 - [] different auth info
 - [] auth by user group
 - [] token expire
-- [] token persistance
+- [] token persistance with redis
 - [] salted password
 
 validation
 ---
 
-not allow update createTime
+- [ ] not allow update createTime
 
 optimization
 ---
@@ -55,3 +60,9 @@ ts enhancement
 
 koa ctx ts support
 sequelize ts support, dynamic keys in 'sequelize' object
+
+security
+---
+
+- [] Does redis runs locally?
+- [] Does MySQL runs locally?

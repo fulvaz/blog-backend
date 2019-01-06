@@ -19,6 +19,14 @@ export class AuthError extends Error {
     defaultValue: any;
 }
 
+export class NotFoundError extends Error {
+    code = 4004;
+    status = 404;
+    defaultValue: any;
+}
+
+// koa要求async内的每个next都要带上await
+// 非async要带上return, 否则不能正常捕获错误
 export function errorHandler(param?) {
     return async function (ctx, next) {
         try {
@@ -33,6 +41,13 @@ export function errorHandler(param?) {
                 }
                 ctx.status = error.status || 200;
             } else if (error instanceof AuthError) {
+                ctx.body = {
+                    code: error.code,
+                    msg: error.message,
+                    data: error.defaultValue,
+                }
+                ctx.status = error.status;
+            } else if (error instanceof NotFoundError) {
                 ctx.body = {
                     code: error.code,
                     msg: error.message,

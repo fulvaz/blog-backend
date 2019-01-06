@@ -14,6 +14,9 @@ module.exports = {
       status: {
         type: Sequelize.INTEGER
       },
+      group: {
+        type: Sequelize.INTEGER
+      },
       password: {
         type: Sequelize.STRING
       },

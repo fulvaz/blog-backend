@@ -9,17 +9,4 @@ export class AuthController {
             }
         })(ctx, next);
     }
-
-    public static authByToken(ctx, next) {
-        return passport.authenticate('bearer', (err, userId, info, status) => {
-            if (userId) {
-                ctx.state.userId = userId;
-                next();
-            } else {
-                ctx.body = '';
-                // TODO: 应该有多种提示
-                throw new AuthError('invalid user');
-            }
-        })(ctx, next);
-    }
 }

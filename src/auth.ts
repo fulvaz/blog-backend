@@ -1,32 +1,37 @@
-import passport from 'koa-passport';
-import db from './models/index.js';
-import jwt from 'jwt-then';
-import { config } from '../config/config';
-import { Strategy as BearerStrategy } from 'passport-http-bearer';
+import passport from "koa-passport";
+import { AuthError } from "./middlewares/error-handler";
+import { resolve, reject } from "bluebird";
 
-const LocalStrategy = require('passport-local').Strategy
-passport.use(new LocalStrategy(
-    async function (username, pass, cb) {
-        try {
-            const user = await db.User.findOne({ where: { name: username } });
-            if (user.password === pass) {
-                const token  = await jwt.sign({id: user.id}, config.jwtSecret);
-                cb(null, token);
-            } else {
-                cb(null, false);
-            }
-        } catch (error) {
-            cb(error, false);
-        }
-    })
-);
+export async function authByToken(ctx, next) {
+  const authPaths = [
+    { path: "/article", method: "POST" },
+    { path: "/article", method: "DELETE" },
+    { path: "/article", method: "PUT" }
+  ];
 
-// 执行passport.authenticate会执行这堆内容
-passport.use(new BearerStrategy(
-    async function(token, cb) {
-        const {id} = await jwt.verify(token, config.jwtSecret);
-        cb(null, id);
-    }
-));
+  const ifNeedAuth = authPaths.find(e => {
+    return e.method === ctx.request.method && e.path === ctx.request.url;
+  });
 
-export const passportA = passport;
+  if (!ifNeedAuth) {
+    await next();
+  } else {
+    await auth(ctx, next);
+    await next();
+  }
+}
+
+function auth(ctx, next) {
+  return new Promise((resolve, reject) => {
+    passport.authenticate("bearer", (err, userId, info, status) => {
+      if (userId) {
+        ctx.state.userId = userId;
+        resolve();
+      } else {
+        ctx.body = "";
+        // TODO: 应该有多种提示
+        reject(new AuthError("invalid user"));
+      }
+    })(ctx, next);
+  });
+}

@@ -14,12 +14,6 @@ module.exports = {
       content: {
         type: Sequelize.STRING
       },
-      createTime: {
-        type: Sequelize.INTEGER
-      },
-      updateTime: {
-        type: Sequelize.INTEGER
-      },
       authorId: {
         type: Sequelize.INTEGER
       },
