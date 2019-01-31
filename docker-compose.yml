@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  db:
+    image: mysql/mysql-server:5.7
+    ports:
+      - 3306:3306
+    volumes:
+      - ./schema:/docker-entrypoint-initdb.d
+      - ./data/db:/var/lib/mysql 
+    environment:
+      MYSQL_ROOT_HOST: "%"
+      MYSQL_HOST: "localhost"
+      MYSQL_ROOT_PASSWORD:  "111111"
+      MYSQL_DATABASE: "blog_dev"
+      MYSQL_USER: "blog"
+      MYSQL_PASSWORD: "123456"
+      MYSQL_LOG_CONSOLE: "true"
+    restart: always
+  
+  app:
+    build: .
+    command: npm start
+    links:
+      - db
+    ports:
+      - 5000:5000
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules

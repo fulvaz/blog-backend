@@ -11,11 +11,19 @@ export class ArticlesController {
     public static async getAll(ctx, next) {
         // from 6 -> 10
         // Project.findAll({ offset: 5, limit: 5 })
-        const {page = 1, size = 10} = ctx.request.query;
+        let {page = 1, size = 10} = ctx.request.query;
+        page = parseInt(page, 10);
+        size = parseInt(size, 10);
+        const total = await  db.Article.count();
         ctx.body = await db.Article.findAll({
             offset: (page - 1) * size,
             limit: size,
         });
+        ctx.body.pagination = {
+            page,
+            size,
+            total,
+        };
         await next();
     }
 

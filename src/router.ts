@@ -11,8 +11,11 @@ router.put('/article/:id', ArticlesController.update);
 router.delete('/article/:id', ArticlesController.delete);
 router.get('/articles', ArticlesController.getAll);
 router.post('/login', AuthController.login);
-router.all('*', async (ctx, next) => {
-    throw new NotFoundError('cc');
-});
+// router.all('*', async (ctx, next) => {
+//     console.log(ctx.status);
+//     if (ctx.status === 404) {
+//         throw new NotFoundError('resource not found!');
+//     }
+// });
 
 

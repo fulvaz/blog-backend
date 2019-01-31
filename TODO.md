@@ -1,8 +1,6 @@
 前端
 ---
 
-
-
 article controller
 ---
 
@@ -14,16 +12,19 @@ article controller
 auth controller
 ---
 
-- [] different auth info
-- [] auth by user group
-- [] token expire
-- [] token persistance with redis
-- [] salted password
+- [ x ] use in controller
+- [ ] different auth info
+- [ ] auth by user group
+- [ ] token expire
+- [ ] token persistance with redis
+- [ ] salted password
+- [ ] token valid limit
 
 validation
 ---
 
 - [ ] not allow update createTime
+- [ ] POST/PUT parameter validation
 
 optimization
 ---
@@ -42,15 +43,18 @@ deploy
 ---
 
 - [ ] nginx
-- [ ] gitlab ci (github ci)
+- [ ] travis-ci + github
 - [ ] hot reload, require.cache
 - [ ] scaling solution
+- [ ] docker compose script
 
 test
 ---
 
 integrated ts
 test db (migrations)
+
+- [ ] performance test > 200qps
 
 log
 ---

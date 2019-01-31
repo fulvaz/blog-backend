@@ -7,6 +7,10 @@ log4js.configure({
             type: 'file',
             filename: resolve(process.cwd(), config.logPath, 'business.log'),
         },
+        securityInfo: {
+            type: 'file',
+            filename: resolve(process.cwd(), config.logPath, 'security.log'),
+        },
         runtimeErr: {
             type: 'file',
             filename: resolve(process.cwd(), config.logPath, 'runtime.log'),
@@ -17,6 +21,10 @@ log4js.configure({
         default: { appenders: ['out'], level: 'info'},
         article: {
             appenders: ['businessErr', 'out'],
+            level: 'info'
+        },
+        security: {
+            appenders: ['securityInfo', 'out'],
             level: 'info'
         },
         business: {
@@ -32,3 +40,4 @@ log4js.configure({
 
 export const articleLogger = log4js.getLogger('article');
 export const runtimeLogger = log4js.getLogger('runtime');
+export const securityLogger = log4js.getLogger('security');

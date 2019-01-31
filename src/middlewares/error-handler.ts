@@ -1,5 +1,5 @@
 import { env } from '../../config/config';
-import { runtimeLogger, articleLogger } from '../logger';
+import { runtimeLogger, articleLogger, securityLogger } from '../logger';
 
 
 
@@ -41,6 +41,7 @@ export function errorHandler(param?) {
                 }
                 ctx.status = error.status || 200;
             } else if (error instanceof AuthError) {
+                securityLogger.info(error.message);
                 ctx.body = {
                     code: error.code,
                     msg: error.message,
