@@ -1,3 +1,6 @@
+前端
+---
+
 article controller
 ---
 
@@ -6,15 +9,22 @@ article controller
 - [ x ] post
 - [ x ] update
 
-user controller
+auth controller
 ---
 
-- [ ] auth
+- [ x ] use in controller
+- [ ] different auth info
+- [ ] auth by user group
+- [ ] token expire
+- [ ] token persistance with redis
+- [ ] salted password
+- [ ] token valid limit
 
 validation
 ---
 
-not allow update createTime
+- [ ] not allow update createTime
+- [ ] POST/PUT parameter validation
 
 optimization
 ---
@@ -29,19 +39,22 @@ error handler
 - [ x ] error handler middleware
 - [ x ] use log4js
 
-
-
 deploy
 ---
 
 - [ ] nginx
-- [ ] gitlab ci (github ci)
+- [ ] travis-ci + github
+- [ ] hot reload, require.cache
+- [ ] scaling solution
+- [ ] docker compose script
 
 test
 ---
 
 integrated ts
 test db (migrations)
+
+- [ ] performance test > 200qps
 
 log
 ---
@@ -51,3 +64,9 @@ ts enhancement
 
 koa ctx ts support
 sequelize ts support, dynamic keys in 'sequelize' object
+
+security
+---
+
+- [] Does redis runs locally?
+- [] Does MySQL runs locally?

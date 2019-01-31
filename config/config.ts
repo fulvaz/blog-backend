@@ -1,7 +1,14 @@
 export const env = process.env.NODE_ENV || 'development';
-export const config = {
-    development: {
+interface Config {
+    jwtSecret: string,
+    logPath: string,
+}
 
+
+export const config: Config = {
+    development: {
+        jwtSecret: 'TEST',
+        logPath: './log'
     },
     test: {
 

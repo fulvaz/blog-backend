@@ -11,11 +11,11 @@ module.exports = {
       name: {
         type: Sequelize.STRING
       },
-      uid: {
-        type: Sequelize.NUMBER
-      },
       status: {
-        type: Sequelize.NUMBER
+        type: Sequelize.INTEGER
+      },
+      group: {
+        type: Sequelize.INTEGER
       },
       password: {
         type: Sequelize.STRING
