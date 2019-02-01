@@ -19,7 +19,7 @@ services:
     restart: always
   
   app:
-    build: .
+    image: fulvaz/blog-backend:production
     environment:
       NODE_ENV: ${VAR_ENV}
     depends_on:

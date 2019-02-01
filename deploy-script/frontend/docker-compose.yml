@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  app:
+    image: fulvaz/blog-frontend:production
+    environment:
+      NODE_ENV: ${VAR_ENV}
+    ports:
+      - 80:80
+    volumes:
+      - ./log:/var/logs/blog
+    restart: always

@@ -50,3 +50,7 @@ travis login使用的是github账号/密码
 使用CI工具避免代码内出现账号密码
 
 研究travis如何加密和解密账号密码, 应该是用ca, openssl
+
+.env中使用了密码
+
+nginx 日志存放
