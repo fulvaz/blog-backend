@@ -26,3 +26,27 @@ show_compatibility_56 = On
 019-01-31T10:57:16.170857Z 8 [Note] Aborted connection 8 to db: 'blog_test' user: 'root' host: 'blog4_app_1.blog4_default' (Got an error reading communication packets)
 
 使用了root
+
+密码保护
+---
+
+db.json
+.travis.yml
+
+关闭sql远程端口
+---
+
+sql和vps都用了root
+
+docker hub会不会公开我的image?
+
+
+
+部署指引
+https://www.linux.com/learn/automatically-deploy-build-images-travis
+
+travis login使用的是github账号/密码
+
+使用CI工具避免代码内出现账号密码
+
+研究travis如何加密和解密账号密码, 应该是用ca, openssl
