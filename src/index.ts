@@ -76,6 +76,7 @@ async function main() {
         const body: any = {
             code: 2000,
             msg: 'OK',
+            env: process.env.NODE_ENV,
         };
 
         const data = ctx.body || '';
@@ -98,6 +99,7 @@ async function main() {
         console.dir(err);
     });
 
+    console.log(process.env.NODE_ENV)
     app.listen(5000);
 }
 

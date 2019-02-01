@@ -18,3 +18,11 @@ passport
 
 missing credentials
 检查bodyParser是不是没有正确解析
+
+编辑sql参数, sql配置如何使用volume的问题
+show_compatibility_56 = On
+
+数据库需要调节参数?
+019-01-31T10:57:16.170857Z 8 [Note] Aborted connection 8 to db: 'blog_test' user: 'root' host: 'blog4_app_1.blog4_default' (Got an error reading communication packets)
+
+使用了root

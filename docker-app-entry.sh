@@ -1,0 +1,2 @@
+#!/bin/bash
+./wait-for-it.sh db:3306 --timeout=1000 --strict -- node_modules/.bin/sequelize db:create && node_modules/.bin/sequelize db:migrate && node_modules/.bin/sequelize db:seed all && npm run start

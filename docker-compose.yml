@@ -2,29 +2,34 @@ version: '3'
 
 services:
   db:
-    image: mysql/mysql-server:5.7
+    image: mysql:5.7
+    # expose:
+    #   - 3306
     ports:
       - 3306:3306
     volumes:
-      - ./schema:/docker-entrypoint-initdb.d
-      - ./data/db:/var/lib/mysql 
+      - ./data/db:/var/lib/mysql
+      - ./db:/docker-entrypoint-initdb.d/:ro
+      - ./config/mysql.conf:/etc/mysql/conf.d
     environment:
       MYSQL_ROOT_HOST: "%"
       MYSQL_HOST: "localhost"
-      MYSQL_ROOT_PASSWORD:  "111111"
-      MYSQL_DATABASE: "blog_dev"
-      MYSQL_USER: "blog"
-      MYSQL_PASSWORD: "123456"
+      MYSQL_ROOT_PASSWORD:  ${VAR_DB_PASSWORD}
       MYSQL_LOG_CONSOLE: "true"
     restart: always
   
   app:
     build: .
-    command: npm start
-    links:
+    environment:
+      NODE_ENV: "test"
+    depends_on:
       - db
     ports:
       - 5000:5000
     volumes:
-      - .:/usr/src/app
-      - /usr/src/app/node_modules
+      - ./log:/var/logs/blog
+    restart: always
+    environment:
+      DB_PASSWORD:  ${VAR_DB_PASSWORD}
+      DB_USERNAME: ${VAR_DB_USERNAME}
+      DB_HOST: ${VAR_DB_HOST}

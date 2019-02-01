@@ -1252,9 +1252,10 @@ sequelize-cli@^5.3.0:
     umzug "^2.1.0"
     yargs "^12.0.2"
 
-sequelize@^4.41.1:
-  version "4.41.2"
-  resolved "https://registry.npmjs.org/sequelize/-/sequelize-4.41.2.tgz#bb9ba30d72e9eeb883c9861cd0e2cac672010883"
+sequelize@^4.41.2:
+  version "4.42.0"
+  resolved "https://registry.npmjs.org/sequelize/-/sequelize-4.42.0.tgz#439467ba7bfe7d5afcc56d62b3e091860fbf18f3"
+  integrity sha512-qxAYnX4rcv7PbNtEidb56REpxNJCdbN0qyk1jb3+e6sE7OrmS0nYMU+MFVbNTJtZfSpOEEL1TX0TkMw+wzZBxg==
   dependencies:
     bluebird "^3.5.0"
     cls-bluebird "^2.1.0"

@@ -1,10 +1,15 @@
-FROM node
+FROM node:10.4.1
+RUN apt-get update && apt-get install vim mysql-client -y
 RUN npm install -g yarn sequelize-cli
 RUN yarn install
 
-COPY ./ /var/app/src
-WORKDIR /var/app/src
+WORKDIR /var/
+ADD . / app/
 
-RUN sequelize db:migrate all
-RUN sequelize db:seed:all
-RUN npm run start
+ENV NODE_ENV=test
+WORKDIR /var/app
+RUN yarn install
+RUN chmod +x docker-app-entry.sh
+RUN chmod +x wait-for-it.sh
+
+ENTRYPOINT [ "./docker-app-entry.sh" ]

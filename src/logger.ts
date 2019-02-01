@@ -5,15 +5,18 @@ log4js.configure({
     appenders: {
         businessErr: {
             type: 'file',
-            filename: resolve(process.cwd(), config.logPath, 'business.log'),
+            // filename: '/var/logs/business.log',
+            filename: resolve(config.logPath, 'business.log'),
         },
         securityInfo: {
             type: 'file',
-            filename: resolve(process.cwd(), config.logPath, 'security.log'),
+            // filename: '/var/logs/security.log',
+            filename: resolve(config.logPath, 'security.log'),
         },
         runtimeErr: {
             type: 'file',
-            filename: resolve(process.cwd(), config.logPath, 'runtime.log'),
+            // filename: '/var/logs/error.log',
+            filename: resolve(config.logPath, 'runtime.log'),
         },
         out: { type: 'stdout' },
     },
