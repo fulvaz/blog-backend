@@ -8,6 +8,7 @@ import jwt from 'jwt-then';
 import { config } from '../config/config';
 import { Strategy as BearerStrategy } from 'passport-http-bearer';
 import { authByToken } from './auth';
+import { runtimeLogger } from './logger';
 
 // 执行passport.authenticate会执行这堆内容
 // 约定了只能这么传{"username":1,"password":13}, 或者额外定义
@@ -96,7 +97,7 @@ async function main() {
     app.use(router.routes());
 
     app.on('error', (err, ctx) => {
-        console.dir(err);
+        runtimeLogger.error(JSON.stringify(err));
     });
 
     console.log(process.env.NODE_ENV)
