@@ -54,3 +54,8 @@ travis login使用的是github账号/密码
 .env中使用了密码
 
 nginx 日志存放
+
+去除私密信息
+---
+
+1. db的配置

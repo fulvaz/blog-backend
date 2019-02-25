@@ -1,4 +1,6 @@
 export const env = process.env.NODE_ENV || 'development';
+
+
 interface Config {
     jwtSecret: string,
     logPath: string,

@@ -6,30 +6,29 @@ services:
     # expose:
     #   - 3306
     ports:
-      - 3306:3306
+      - 3306
     volumes:
-      - ./data/db:/var/lib/mysql
-      - ./db:/docker-entrypoint-initdb.d/:ro
-      - ./config/mysql.conf:/etc/mysql/conf.d
+      - /var/mysql/data/db:/var/lib/mysql
+      - /var/mysql:/docker-entrypoint-initdb.d/:ro
+      - /var/mysql/config/mysql.conf:/etc/mysql/conf.d
     environment:
       MYSQL_ROOT_HOST: "%"
       MYSQL_HOST: "localhost"
       MYSQL_ROOT_PASSWORD:  ${VAR_DB_PASSWORD}
-      MYSQL_LOG_CONSOLE: "true"
+      MYSQL_LOG_CONSOLE: "True"
     restart: always
   
   app:
     image: fulvaz/blog-backend:production
     environment:
       NODE_ENV: ${VAR_ENV}
+      DB_PASSWORD: ${VAR_DB_PASSWORD}
+      DB_USERNAME: ${VAR_DB_USERNAME}
+      DB_HOST: ${VAR_DB_HOST}
     depends_on:
       - db
     ports:
       - 5000:5000
     volumes:
-      - ./log:/var/logs/blog
+      - /var/logs/blog:/var/logs/blog
     restart: always
-    environment:
-      DB_PASSWORD:  ${VAR_DB_PASSWORD}
-      DB_USERNAME: ${VAR_DB_USERNAME}
-      DB_HOST: ${VAR_DB_HOST}
