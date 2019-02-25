@@ -101,6 +101,8 @@ async function main() {
     });
 
     console.log(process.env.NODE_ENV)
+    console.log('pass' + process.env.VAR_DB_PASSWORD)
+    
     app.listen(5000);
 }
 
