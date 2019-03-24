@@ -36,6 +36,24 @@ server.get('/articles', (req, res) => {
         size,
     });
 });
+server.get('/article/:title', (req, res) => {
+    const { title } = req.params;
+    const data = articles.find(e => e.title === title);
+
+    if (!data) {
+        res.jsonp({
+            code: 2000,
+            data: 'not found!',
+            msg: 2000,
+        });
+    } else {
+        res.jsonp({
+            code: 2000,
+            data,
+            msg: 2000,
+        });
+    }
+});
 
 // Use default router
 server.listen(5000, () => {
