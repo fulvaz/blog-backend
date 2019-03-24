@@ -1,7 +1,5 @@
-<!---
 @@@title:搭建ts+vsc+debug+断点+live-reload
 @@@date:2019-01-01
---->
 
 
 1. 如果你想要dev, live reload

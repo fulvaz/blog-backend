@@ -14,10 +14,11 @@ const contents = fileNames
         const regDate = new RegExp(/^@@@date:([^@\n]+)/gm);
         const title = regTitle.exec(content)[1];
         const date = regDate.exec(content)[1];
+        
         return {
             title,
             date,
-            content,
+            content: content.replace(/^@@@.+\n+/gm, ''),
         };
     });
 
